@@ -1,9 +1,9 @@
 package $package$
 
 import cats.effect.{ ContextShift, Sync }
-import $package$.domain.joke.{ JokeService, JokeValidationInterpreter }
-import $package$.infrastructure.endpoint.JokeEndpoint
-import $package$.infrastructure.repository.JokeRepositoryInterpreter
+import $package$.domain.$model$.{ $model;format="cap"$Service, $model;format="cap"$ValidationInterpreter }
+import $package$.infrastructure.endpoint.$model;format="cap"$Endpoint
+import $package$.infrastructure.repository.$model;format="cap"$RepositoryInterpreter
 import doobie.util.transactor.Transactor
 import org.http4s.HttpRoutes
 import org.http4s.server.Router
@@ -14,21 +14,21 @@ import tapir.openapi.circe.yaml._
 
 object Route {
 
-  def jokeRoutes[F[_]: Sync](trx: Transactor[F])(
+  def $model$Routes[F[_]: Sync](trx: Transactor[F])(
     implicit serverOptions: Http4sServerOptions[F],
     fcs: ContextShift[F]
   ): HttpRoutes[F] = {
-    val repo                    = new JokeRepositoryInterpreter[F](trx)
-    val validator               = new JokeValidationInterpreter[F](repo)
-    val service: JokeService[F] = new JokeService[F](repo, validator)
-    JokeEndpoint.endpoints(service)
+    val repo                    = new $model;format="cap"$RepositoryInterpreter[F](trx)
+    val validator               = new $model;format="cap"$ValidationInterpreter[F](repo)
+    val service: $model;format="cap"$Service[F] = new $model;format="cap"$Service[F](repo, validator)
+    $model;format="cap"$Endpoint.endpoints(service)
   }
 
   def allRoutes[F[_]: Sync](trx: Transactor[F])(
     implicit serverOptions: Http4sServerOptions[F],
     fcs: ContextShift[F]
   ): HttpRoutes[F] = {
-    val yaml = JokeEndpoint.apis.toOpenAPI("$name$", "1.0").toYaml
-    Router("/docs" -> new SwaggerHttp4s(yaml).routes, "/" -> jokeRoutes(trx))
+    val yaml = $model;format="cap"$Endpoint.apis.toOpenAPI("$name$", "1.0").toYaml
+    Router("/docs" -> new SwaggerHttp4s(yaml).routes, "/" -> $model$Routes(trx))
   }
 }
