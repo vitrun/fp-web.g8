@@ -13,8 +13,8 @@ val TapirV         = "0.9.1"
 
 lazy val root = (project in file("."))
   .settings(
-    organization := "com.organization",
-    name := "awesomeproject",
+    organization := "$organization$",
+    name := "$name$",
     version := "0.0.1-SNAPSHOT",
     scalaVersion := "2.13.0",
     //scala  libraries

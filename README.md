@@ -8,8 +8,8 @@ brew update && brew install giter8
 g8 vitrun/fp-web.g8
 ```
 # Stack
-- [Http4s](http://http4s.org/) as the web server.  
-- [ZIO](https://zio.dev/) for functional effect handling
+- [Http4s](http://http4s.org/) as the web server
+- [ZIO](https://zio.dev/) for side-effect management
 - [Circe](https://circe.github.io/circe/) for json serialization
 - [Doobie](https://github.com/tpolecat/doobie) for database access
 - [ScalaCheck](https://www.scalacheck.org/) for property based testing
